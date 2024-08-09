@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#include "./utils.h"
-#include "./alien.h"
-#include "./player.h"
-#include "./bullet.h"
+#include <Utils/Utils.h>
+#include <Alien/Alien.h>
+#include <Player/Player.h>
+#include <Bullet/Bullet.h>
 
 void bullet_spawn(character shooter, position pos, bullet *bullets[MAX_BULLETS_ON_SCREEN])
 {

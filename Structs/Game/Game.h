@@ -1,10 +1,10 @@
 #ifndef GAME_H
 
 #define GAME_H
-#include <Utils.h>
-#include <Player.h>
-#include <Alien.h>
-#include <Bullet.h>
+#include <Utils/Utils.h>
+#include <Player/Player.h>
+#include <Alien/Alien.h>
+#include <Bullet/Bullet.h>
 
 typedef enum
 {

@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./utils.h"
-#include "./alien.h"
+#include <Utils/Utils.h>
+
+#include <Alien/Alien.h>
+
 
 void alien_move(alien *alien, direction direction)
 {
