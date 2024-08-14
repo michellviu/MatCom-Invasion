@@ -20,6 +20,7 @@ typedef struct
     int level;
     player *player;
     alien *aliens[ALIENIGENAS];
+    int aliens_muertos[ALIENIGENAS];
     bullet *bullets[MAX_BULLETS_ON_SCREEN];
     character winner;
 } game;

@@ -31,7 +31,7 @@ void render_player_lives(SDL_Renderer *renderer, game *game)
     SDL_Texture *life_texture; // Textura para la imagen de la vida del jugador
 
     // Carga la imagen de la vida del jugador desde un archivo BMP
-    life_surface = SDL_LoadBMP("./Media/Player.jpg");
+    life_surface = SDL_LoadBMP("./Media/Player_BMP.bmp");
     // Crea una textura a partir de la superficie cargada
     life_texture = SDL_CreateTextureFromSurface(renderer, life_surface);
     // Libera la superficie ya que no se necesita más

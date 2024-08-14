@@ -56,11 +56,13 @@ void game_init(game *game)
   {
     game->aliens[i] = malloc(sizeof(alien));
     position pos = {.x = BORDER + rand() % (WINDOW_WIDTH - 2 * BORDER), .y = 0};
-    alien_spawn(game->aliens[i], pos);
-    //   game->aliens[i]->direction = RIGHT;
-    //   alien_move(game->aliens[i], game->aliens[i]->direction);
-    alien_move(game->aliens[i], DOWN);
+    alien_spawn(game->aliens[i], pos, i);
+    game->aliens[i]->status = DEAD;
+    game->aliens_muertos[i] = 0;
+    // alien_move(game->aliens[i], DOWN);
   }
+  game->aliens[0]->status = ALIVE;
+  game->aliens[1]->status = ALIVE;
 
   // initialize all bullets and set them as inactive
   for (int i = 0; i < MAX_BULLETS_ON_SCREEN; ++i)
@@ -84,9 +86,8 @@ void game_update(game *game, int alienmovecounter)
     for (int i = 0; i < ALIENIGENAS; ++i)
     {
 
-      if (game->aliens[i]->pos.y != 0 && game->aliens[i]->status == ALIVE)
+      if (game->aliens[i]->status == ALIVE)
       {
-
         alien_move(game->aliens[i], DOWN);
       }
     }
@@ -113,7 +114,7 @@ void game_update(game *game, int alienmovecounter)
     {
       bullet_move(game->bullets[i]);
       check_player_collision(game->bullets[i], game->player);
-      check_alien_collision(game->bullets[i], game->aliens);
+      check_alien_collision(game->bullets[i], game->aliens, game->aliens_muertos);
     }
     if (game->bullets[i]->status == ACTIVE && (game->bullets[i]->pos.y < 0 || game->bullets[i]->pos.y > WINDOW_HEIGHT))
     {
