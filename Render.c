@@ -5,20 +5,20 @@
 #include <SDL2/SDL_ttf.h>
 
 // custom headers
-#include <Utils/Utils.h>
-#include <Alien/Alien.h>
-#include <Player/Player.h>
-#include <Bullet/Bullet.h>
-#include <Game/Game.h>
-#include <Render/Render.h>
+#include "./Utils.h"
+#include "./Alien.h"
+#include "./Player.h"
+#include "./Bullet.h"
+#include "./Game.h"
+#include "./Render.h"
 
 // This function destroys the given textures used for rendering the background, player, bullets, and aliens.
-void render_cleanup(SDL_Texture *bg_texture, SDL_Texture *player_texture, SDL_Texture *bullet_texture, SDL_Texture *alien_texture[ALIEN_BLOCK_ROWS])
+void render_cleanup(SDL_Texture *bg_texture, SDL_Texture *player_texture, SDL_Texture *bullet_texture, SDL_Texture *alien_texture[ALIENIGENAS])
 {
     SDL_DestroyTexture(bg_texture);
     SDL_DestroyTexture(player_texture);
     SDL_DestroyTexture(bullet_texture);
-    for (int i = 0; i < ALIEN_BLOCK_ROWS; ++i)
+    for (int i = 0; i < ALIENIGENAS; ++i)
     {
         SDL_DestroyTexture(alien_texture[i]);
     }
@@ -31,7 +31,7 @@ void render_player_lives(SDL_Renderer *renderer, game *game)
     SDL_Texture *life_texture; // Textura para la imagen de la vida del jugador
 
     // Carga la imagen de la vida del jugador desde un archivo BMP
-    life_surface = SDL_LoadBMP("Media/Player.jpg");
+    life_surface = SDL_LoadBMP("./Media/Player.jpg");
     // Crea una textura a partir de la superficie cargada
     life_texture = SDL_CreateTextureFromSurface(renderer, life_surface);
     // Libera la superficie ya que no se necesita más

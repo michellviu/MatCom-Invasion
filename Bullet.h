@@ -2,9 +2,9 @@
 
 #define BULLETS_H
 
-#include <Utils/Utils.h>
-#include <Alien/Alien.h>
-#include <Player/Player.h>
+#include "./Utils.h"
+#include "./Alien.h"
+#include "./Player.h"
 
 typedef enum
 {

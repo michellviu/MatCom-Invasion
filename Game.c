@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include <SDL2/SDL.h>
 
-#include <Alien/Alien.h>
-#include <Player/Player.h>
-#include <Bullet/Bullet.h>
-#include <Game/Game.h>
-#include <Utils/Utils.h>
+#include "./Utils.h"
+#include "./Alien.h"
+#include "./Player.h"
+#include "./Bullet.h"
+#include "./Game.h"
 
 void game_cleanup(game *game)
 {

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <Utils/Utils.h>
-#include <Player/Player.h>
+#include "./Utils.h"
+#include "./Player.h"
 
 void player_move(player *player, direction direction)
 {

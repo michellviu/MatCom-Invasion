@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <Utils/Utils.h>
-
-#include <Alien/Alien.h>
-
+#include "./Utils.h"
+#include "./Alien.h"
 
 void alien_move(alien *alien, direction direction)
 {
@@ -26,6 +24,7 @@ void alien_move(alien *alien, direction direction)
         break;
     default:
     }
+    alien->pos = newpos;
 }
 
 void alien_spawn(alien *alien, position pos)

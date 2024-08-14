@@ -1,7 +1,7 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include <Game/Game.h>
+#include "./Game.h"
 #include <SDL2/SDL.h>
 
 //Funcion para renderizar el juego

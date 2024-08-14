@@ -3,6 +3,8 @@
         "utils.h": "c",
         "render.h": "c",
         "game.h": "c",
-        "bullet.h": "c"
+        "bullet.h": "c",
+        "player.h": "c",
+        "alien.h": "c"
     }
 }
