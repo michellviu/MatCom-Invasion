@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <pthread.h>
 
 // sdl headers
 #include <SDL2/SDL.h>
@@ -148,6 +149,79 @@ void start(SDL_Renderer *renderer, SDL_Window *window, game *game, SDL_Texture *
     render_start(renderer, game);
 }
 
+struct Datos_Hilo1
+{
+    int playerleft;
+    int playerright;
+    int quit;
+    SDL_Event event;
+    game *game0;
+};
+
+void *eventos(void *arg)
+{
+    struct Datos_Hilo1 *datos = (struct Datos_Hilo1 *)arg;
+
+    // polling for event started
+    while (SDL_PollEvent(&datos->event))
+    {
+        if (datos->event.type == SDL_QUIT)
+        {
+            datos->quit = 1;
+            break;
+        }
+
+        // checking keypresses while game is running
+        else if (datos->event.type == SDL_KEYDOWN && datos->game0->state == RUNNING)
+        {
+
+            if (datos->event.key.keysym.sym == SDLK_LEFT)
+            {
+                datos->playerright = 0;
+                datos->playerleft = 1;
+            }
+            else if (datos->event.key.keysym.sym == SDLK_RIGHT)
+            {
+                datos->playerleft = 0;
+                datos->playerright = 1;
+            }
+            if (datos->event.key.keysym.sym == SDLK_SPACE)
+            {
+                bullet_spawn(PLAYER, datos->game0->player->pos, datos->game0->bullets);
+            }
+            if (datos->event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                game_pause(datos->game0);
+            }
+        }
+
+        // checking keyups while game is running
+        else if (datos->event.type == SDL_KEYUP && datos->game0->state == RUNNING)
+        {
+            if (datos->event.key.keysym.sym == SDLK_LEFT)
+            {
+                datos->playerleft = 0;
+            }
+            if (datos->event.key.keysym.sym == SDLK_RIGHT)
+            {
+                datos->playerright = 0;
+            }
+        }
+    } // polling for event ended
+
+    // do player movement based on values of variables
+    // putting player_move() directly in the event polling loop causes it to be called
+    // irregularly and upredictably, making movement choppy
+    if (datos->playerleft == 1)
+    {
+        player_move(datos->game0->player, LEFT);
+    }
+    if (datos->playerright == 1)
+    {
+        player_move(datos->game0->player, RIGHT);
+    }
+}
+
 int main(int argc, char *argv[])
 {
     // initialize the game variable and allocate memory to it
@@ -192,11 +266,17 @@ int main(int argc, char *argv[])
     }
     SDL_FreeSurface(alien_surface);
 
-    int playerleft = 0;
-    int playerright = 0;
+    
     int quit = 0;
     int starttimer;
     int alienmovecounter = 0;
+
+    struct Datos_Hilo1 datos;
+    datos.event = event;
+    datos.game0 = game0;
+    datos.playerleft = 0;
+    datos.playerright = 0;
+    datos.quit = 0;
 
     while (1)
     {
@@ -224,70 +304,13 @@ int main(int argc, char *argv[])
 
             ++alienmovecounter;
 
-            // polling for event started
-            while (SDL_PollEvent(&event))
-            {
-                if (event.type == SDL_QUIT)
-                {
-                    quit = 1;
-                    break;
-                }
-
-                // checking keypresses while game is running
-                else if (event.type == SDL_KEYDOWN && game0->state == RUNNING)
-                {
-
-                    if (event.key.keysym.sym == SDLK_LEFT)
-                    {
-                        playerright = 0;
-                        playerleft = 1;
-                    }
-                    else if (event.key.keysym.sym == SDLK_RIGHT)
-                    {
-                        playerleft = 0;
-                        playerright = 1;
-                    }
-                    if (event.key.keysym.sym == SDLK_SPACE)
-                    {
-                        bullet_spawn(PLAYER, game0->player->pos, game0->bullets);
-                    }
-                    if (event.key.keysym.sym == SDLK_ESCAPE)
-                    {
-                        game_pause(game0);
-                    }
-                }
-
-                // checking keyups while game is running
-                else if (event.type == SDL_KEYUP && game0->state == RUNNING)
-                {
-                    if (event.key.keysym.sym == SDLK_LEFT)
-                    {
-                        playerleft = 0;
-                    }
-                    if (event.key.keysym.sym == SDLK_RIGHT)
-                    {
-                        playerright = 0;
-                    }
-                }
-            } // polling for event ended
-
-            // break out from gameloop if quit
-            if (quit)
+            pthread_t hilo_eventos;
+            pthread_create(&hilo_eventos, NULL, eventos, (void *)&datos);
+            if (datos.quit)
             {
                 break;
             }
-
-            // do player movement based on values of variables
-            // putting player_move() directly in the event polling loop causes it to be called
-            // irregularly and upredictably, making movement choppy
-            if (playerleft == 1)
-            {
-                player_move(game0->player, LEFT);
-            }
-            if (playerright == 1)
-            {
-                player_move(game0->player, RIGHT);
-            }
+            // break out from gameloop if quit
 
             // check if any aliens are still alive
             // if all are dead, game over, with player as winner

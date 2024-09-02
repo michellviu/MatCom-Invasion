@@ -55,7 +55,7 @@ void game_init(game *game)
   for (int i = 0; i < ALIENIGENAS; ++i)
   {
     game->aliens[i] = malloc(sizeof(alien));
-    position pos = {.x = BORDER + rand() % (WINDOW_WIDTH - 2 * BORDER), .y = 0};
+    position pos = {.x = BORDER + rand() % (WINDOW_WIDTH -  2*BORDER), .y = 0};
     alien_spawn(game->aliens[i], pos, i);
     game->aliens[i]->status = DEAD;
     game->aliens_muertos[i] = 0;

@@ -111,7 +111,7 @@ void render_start(SDL_Renderer *renderer, game *game)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    SDL_Surface *font_surface = TTF_RenderText_Solid(font, "SPACE  INVADERS", fontcolor);
+    SDL_Surface *font_surface = TTF_RenderText_Solid(font, "MATCOM  INVADERS", fontcolor);
     SDL_Texture *font_texture = SDL_CreateTextureFromSurface(renderer, font_surface);
     SDL_RenderCopy(renderer, font_texture, NULL, &title_rect);
     SDL_FreeSurface(font_surface);
