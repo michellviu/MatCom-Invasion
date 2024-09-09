@@ -41,19 +41,23 @@ void check_alien_collision(bullet *bullet, alien *aliens[ALIENIGENAS], int alien
     for (int i = 0; i < ALIENIGENAS; ++i)
     {
         if (bullet->shooter == PLAYER && aliens[i]->status == ALIVE && bullet->pos.y + SPRITE_SIZE >= aliens[i]->pos.y && bullet->pos.y <= aliens[i]->pos.y + SPRITE_SIZE && bullet->pos.x + SPRITE_SIZE >= aliens[i]->pos.x && bullet->pos.x <= aliens[i]->pos.x + SPRITE_SIZE)
-        {
+        {   
             bullet->status = INACTIVE;
-            aliens[i]->status = DEAD;
-            aliens_muertos[i] = 1;
-            for (int j = 0; j < ALIENIGENAS; j++)
+            aliens[i]->lives = aliens[i]->lives - 1;
+            if (aliens[i]->lives == 0)
             {
-                if (aliens[j]->status == DEAD && !aliens_muertos[j])
+                aliens[i]->status = DEAD;
+                aliens_muertos[i] = 1;
+                for (int j = 0; j < ALIENIGENAS; j++)
                 {
-                    aliens[j]->status = ALIVE;
-                    cont++;
-                    if (cont == 2)
+                    if (aliens[j]->status == DEAD && !aliens_muertos[j])
                     {
-                        break;
+                        aliens[j]->status = ALIVE;
+                        cont++;
+                        if (cont == 2)
+                        {
+                            break;
+                        }
                     }
                 }
             }

@@ -52,11 +52,25 @@ void game_init(game *game)
 
   // spawn all aliens and move them once (because they spawn at the border and end up moving
   // down right at the beginning)
+  int alien_lives;
   for (int i = 0; i < ALIENIGENAS; ++i)
   {
     game->aliens[i] = malloc(sizeof(alien));
-    position pos = {.x = BORDER + rand() % (WINDOW_WIDTH -  2*BORDER), .y = 0};
-    alien_spawn(game->aliens[i], pos, i);
+    position pos = {.x = BORDER + rand() % (WINDOW_WIDTH - 2 * BORDER), .y = 0};
+    if ( i < 8)
+    {
+      alien_lives = 1;
+    }
+    else if ( i < 16)
+    {
+      alien_lives = 2;
+    }
+    else
+    {
+      alien_lives = 3;
+    }
+
+    alien_spawn(game->aliens[i], pos, i, alien_lives);
     game->aliens[i]->status = DEAD;
     game->aliens_muertos[i] = 0;
     // alien_move(game->aliens[i], DOWN);

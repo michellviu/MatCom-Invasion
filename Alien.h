@@ -14,10 +14,11 @@ typedef struct
     alienstatus status;
     direction direction;
     int index;
+    int lives;
 
 } alien;
 
 void alien_move(alien *alien, direction direction);
-void alien_spawn(alien *alien, position pos, int index);
+void alien_spawn(alien *alien, position pos, int index,int lives);
 
 #endif

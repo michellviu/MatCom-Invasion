@@ -27,9 +27,10 @@ void alien_move(alien *alien, direction direction)
     alien->pos = newpos;
 }
 
-void alien_spawn(alien *alien, position pos, int index)
+void alien_spawn(alien *alien, position pos, int index, int lives)
 {
     alien->pos = pos;
     alien->status = ALIVE;
     alien->index = index;
+    alien->lives = lives;
 }
