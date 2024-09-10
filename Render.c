@@ -31,7 +31,7 @@ void render_player_lives(SDL_Renderer *renderer, game *game)
     SDL_Texture *life_texture; // Textura para la imagen de la vida del jugador
 
     // Carga la imagen de la vida del jugador desde un archivo BMP
-    life_surface = SDL_LoadBMP("./Media/Player_BMP.bmp");
+    life_surface = SDL_LoadBMP("/home/michell/Escritorio/MatCom-Invasion/Media/Player_BMP.bmp");
     // Crea una textura a partir de la superficie cargada
     life_texture = SDL_CreateTextureFromSurface(renderer, life_surface);
     // Libera la superficie ya que no se necesita más
@@ -61,7 +61,7 @@ void render_over(SDL_Renderer *renderer, game *game)
     SDL_Rect exit_rect = {150, 300, 350, 45};
 
     TTF_Init();
-    TTF_Font *font = TTF_OpenFont("./Media/ARCADECLASSIC.TTF", 40);
+    TTF_Font *font = TTF_OpenFont("/home/michell/Escritorio/MatCom-Invasion/Media/ARCADECLASSIC.TTF", 40);
     SDL_Color fontcolor = {255, 255, 255, 255};
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -105,7 +105,7 @@ void render_start(SDL_Renderer *renderer, game *game)
     SDL_Rect exit_rect = {150, 280, 350, 45};
 
     TTF_Init();
-    TTF_Font *font = TTF_OpenFont("./Media/ARCADECLASSIC.TTF", 40);
+    TTF_Font *font = TTF_OpenFont("/home/michell/Escritorio/MatCom-Invasion/Media/ARCADECLASSIC.TTF", 40);
     SDL_Color fontcolor = {255, 255, 255, 255};
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -142,7 +142,7 @@ void render_paused(SDL_Renderer *renderer, game *game)
     SDL_Rect exit_rect = {150, 280, 350, 45};
 
     TTF_Init();
-    TTF_Font *font = TTF_OpenFont("./Media/ARCADECLASSIC.TTF", 40);
+    TTF_Font *font = TTF_OpenFont("/home/michell/Escritorio/MatCom-Invasion/Media/ARCADECLASSIC.TTF", 40);
     SDL_Color fontcolor = {255, 255, 255, 255};
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

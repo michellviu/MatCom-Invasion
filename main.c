@@ -245,21 +245,21 @@ int main(int argc, char *argv[])
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    SDL_Surface *bg_surface = SDL_LoadBMP("./Media/Fondo.bmp");
+    SDL_Surface *bg_surface = SDL_LoadBMP("/home/michell/Escritorio/MatCom-Invasion/Media/Fondo.bmp");
     SDL_Texture *bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
     SDL_FreeSurface(bg_surface);
 
-    SDL_Surface *player_surface = SDL_LoadBMP("./Media/Player_BMP.bmp");
+    SDL_Surface *player_surface = SDL_LoadBMP("/home/michell/Escritorio/MatCom-Invasion/Media/Player_BMP.bmp");
     SDL_Texture *player_texture = SDL_CreateTextureFromSurface(renderer, player_surface);
     SDL_FreeSurface(player_surface);
 
-    SDL_Surface *bullet_surface = SDL_LoadBMP("./Media/invaders_sword.bmp");
+    SDL_Surface *bullet_surface = SDL_LoadBMP("/home/michell/Escritorio/MatCom-Invasion/Media/invaders_sword.bmp");
     SDL_Texture *bullet_texture = SDL_CreateTextureFromSurface(renderer, bullet_surface);
     SDL_FreeSurface(bullet_surface);
 
     SDL_Texture *alien_texture[ALIENIGENAS];
 
-    SDL_Surface *alien_surface = SDL_LoadBMP("./Media/Alien_BMP.bmp");
+    SDL_Surface *alien_surface = SDL_LoadBMP("/home/michell/Escritorio/MatCom-Invasion/Media/Alien_BMP.bmp");
     for (int i = 0; i < ALIENIGENAS; i++)
     {
         alien_texture[i] = SDL_CreateTextureFromSurface(renderer, alien_surface);
